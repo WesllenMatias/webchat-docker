@@ -23,16 +23,6 @@ RUN apt-get install php-fpm -y
 RUN apt-get install php-curl -y
 RUN mkdir /var/www/html/lhc_web/
 COPY ./lhc_web /var/www/html/lhc_web/
-RUN chmod -R 777 /var/www/html/lhc_web/cache/
-RUN chmod 777 /var/www/html/lhc_web/settings/
-RUN chmod -R 777 /var/www/html/lhc_web/var/storage
-RUN chmod -R 777 /var/www/html/lhc_web/var/userphoto
-RUN chmod -R 777 /var/www/html/lhc_web/var/storageform
-RUN chmod -R 777 /var/www/html/lhc_web/var/storageadmintheme
-RUN chmod -R 777 /var/www/html/lhc_web/var/botphoto
-RUN chmod -R 777 /var/www/html/lhc_web/var/bottrphoto
-RUN chmod -R 777 /var/www/html/lhc_web/var/storageinvitation
-RUN chmod -R 777 /var/www/html/lhc_web/var/storagedocshare
-RUN chmod -R 777 /var/www/html/lhc_web/var/storagetheme
-RUN chmod -R 777 /var/www/html/lhc_web/var/tmpfiles
+COPY ./permissao.sh /var/www/html/lhc_web/
+CMD /bin/bash permissão.sh
 ENTRYPOINT /etc/init.d/apache2 start && /bin/bash
