@@ -1,0 +1,28 @@
+version: "3.5"
+
+services:
+#  Mysql Container
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-webchat
+    hostname: mysql-webchat
+    ports:
+      - "34060:3306"
+    volumes:
+      - ./var/lib/mysql:/var/lib/mysql
+    env_file:
+      - ./mysql.env
+    restart: always
+#  WebChat Container
+  webchat:
+    build: "./img"
+    container_name: webchat
+    hostname: webchat
+    volumes:
+      - ./var/www/html:/var/www/html
+    ports:
+      - "8181:80"
+    depends_on:
+      - mysql
+    restart: always
+    command: service apache2 start
