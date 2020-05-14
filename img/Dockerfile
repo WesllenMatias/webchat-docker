@@ -24,5 +24,5 @@ RUN apt-get install php-curl -y
 RUN mkdir /var/www/html/lhc_web/
 COPY ./lhc_web /var/www/html/lhc_web/
 COPY ./permissao.sh /var/www/html/lhc_web/
-CMD /bin/bash permissão.sh
+WORKDIR /var/www/html/lhc_web/
 ENTRYPOINT /etc/init.d/apache2 start && /bin/bash
